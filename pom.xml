@@ -7,7 +7,7 @@
     <groupId></groupId>
     <artifactId></artifactId>
     <packaging>jar</packaging>
-    <version></version>
+    <version>0.1</version>
     <name></name>
 
     <properties>
@@ -23,7 +23,6 @@
             <groupId>intellimate.izou</groupId>
             <artifactId>Izou</artifactId>
             <version>0.9-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
