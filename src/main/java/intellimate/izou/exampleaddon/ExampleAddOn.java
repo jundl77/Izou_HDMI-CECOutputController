@@ -18,7 +18,7 @@ public class ExampleAddOn extends AddOn {
     private static final String ID = ExampleAddOn.class.getCanonicalName();
 
     public ExampleAddOn() {
-        super("asdasd");
+        super(ID);
     }
 
     @Override

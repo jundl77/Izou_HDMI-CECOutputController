@@ -7,7 +7,7 @@
     <groupId></groupId>
     <artifactId></artifactId>
     <packaging>jar</packaging>
-    <version>0.1</version>
+    <version></version>
     <name></name>
 
     <properties>
