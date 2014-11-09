@@ -15,6 +15,7 @@ public class ExampleOutputExtension extends OutputExtension<ExampleOutputData> {
     public ExampleOutputExtension() {
         super(ID);
         addContentDataToWishList("example");    //has to be same as contentData Id
+        setPluginId(ExampleOutputPlugin.ID);
     }
 
     @Override
