@@ -6,11 +6,15 @@ import intellimate.izou.contentgenerator.ContentGenerator;
 import intellimate.izou.events.EventController;
 import intellimate.izou.output.OutputExtension;
 import intellimate.izou.output.OutputPlugin;
+import ro.fortsoft.pf4j.Extension;
+
+import java.nio.file.Path;
 
 /**
  * Example addOn for Izou, PLEASE DELETE THIS PACKAGE ON FINAL DISTRIBUTION. It is only meant as a model for
  * how addOns are structured. It is not meant to be included in the final addOn. 
  */
+@Extension
 public class ExampleAddOn extends AddOn {
     /*
     ID consists of package_name.class_name
@@ -59,5 +63,15 @@ public class ExampleAddOn extends AddOn {
         outputExtensions[0] = new ExampleOutputExtension();
         //outputExtensions[0].addContentDataToWishList("example");
         return outputExtensions;
+    }
+
+    /**
+     * use this method to register a property file (if you have one) so that Izou reloads it when you update it manually
+     *
+     * @return the path to the properties file
+     */
+    @Override
+    public Path registerPropertiesFile() {
+        return null;
     }
 }
