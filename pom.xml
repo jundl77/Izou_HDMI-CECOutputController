@@ -98,6 +98,8 @@
                             <Plugin-Version>${plugin.version}</Plugin-Version>
                             <Plugin-Provider>${plugin.provider}</Plugin-Provider>
                             <Plugin-Dependencies>${plugin.dependencies}</Plugin-Dependencies>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifestEntries>
                     </archive>
                 </configuration>
