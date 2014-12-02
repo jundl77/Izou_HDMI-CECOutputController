@@ -12,19 +12,16 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by julianbrendl on 10/24/14.
+ * Created by LeanderK on 02/12/14.
  */
-public class ExampleContentGenerator extends ContentGenerator {
-    /*
-    ID consists of class_name
-     */
-    private static final String ID = ExampleContentGenerator.class.getCanonicalName();
-    public static final String ResourceID = ExampleContentGenerator.class.getCanonicalName()+"resource";
+public class ExampleContentGeneratorResource extends ContentGenerator{
+    public static String ID = ExampleContentGeneratorResource.class.getCanonicalName();
+    public static String ResourceID = ExampleContentGenerator.class.getCanonicalName() +".Resource1";
 
-    IdentificationManager identificationManager = IdentificationManager.getInstance();
+    private IdentificationManager identificationManager = IdentificationManager.getInstance();
 
-    public ExampleContentGenerator(Context context) {
-        super(ID, context);
+    public ExampleContentGeneratorResource(Context context) {
+        super(ExampleContentGenerator.class.getCanonicalName(), context);
     }
 
     @Override
@@ -37,16 +34,16 @@ public class ExampleContentGenerator extends ContentGenerator {
 
     @Override
     public List<String> announceEvents() {
-        return Arrays.asList(ExampleActivator.EXAMPLE_EVENT_TYPE);
+        return null;
     }
 
     @Override
     public List<Resource> provideResource(List<Resource> list, Optional<Event> optional) {
-        System.out.println("ContentGenerator generates Resource for the Event");
+        System.out.println("ContentGenerator generates Resource for the Request");
         Optional<Identification> identification = identificationManager.getIdentification(this);
         Resource<String> resource = new Resource<>(ResourceID);
         identification.ifPresent(resource::setProvider);
-        resource.setResource("Hello World!");
+        resource.setResource("Awesome Resource!");
         return Arrays.asList(resource);
     }
 }

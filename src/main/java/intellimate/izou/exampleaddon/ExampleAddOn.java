@@ -3,12 +3,10 @@ package intellimate.izou.exampleaddon;
 import intellimate.izou.activator.Activator;
 import intellimate.izou.addon.AddOn;
 import intellimate.izou.contentgenerator.ContentGenerator;
-import intellimate.izou.events.EventController;
+import intellimate.izou.events.EventsController;
 import intellimate.izou.output.OutputExtension;
 import intellimate.izou.output.OutputPlugin;
 import ro.fortsoft.pf4j.Extension;
-
-import java.nio.file.Path;
 
 /**
  * Example addOn for Izou, PLEASE DELETE THIS PACKAGE ON FINAL DISTRIBUTION. It is only meant as a model for
@@ -33,45 +31,48 @@ public class ExampleAddOn extends AddOn {
     @Override
     public Activator[] registerActivator() {
         Activator[] activators = new Activator[1];
-        activators[0] = new ExampleActivator();
+        activators[0] = new ExampleActivator(getContext());
         return activators;
     }
 
     @Override
     public ContentGenerator[] registerContentGenerator() {
-        ContentGenerator[] contentGenerators = new ContentGenerator[1];
-        contentGenerators[0] = new ExampleContentGenerator();
-        contentGenerators[0].registerEvent(ExampleActivator.EXAMPLE_EVENT_ID);
+        ContentGenerator[] contentGenerators = new ContentGenerator[2];
+        contentGenerators[0] = new ExampleContentGenerator(getContext());
+        contentGenerators[1] = new ExampleContentGeneratorResource(getContext());
         return contentGenerators;
     }
 
     @Override
-    public EventController[] registerEventController() {
+    public EventsController[] registerEventController() {
         return null;
     }
 
     @Override
     public OutputPlugin[] registerOutputPlugin() {
         OutputPlugin[] outputPlugins = new OutputPlugin[1];
-        outputPlugins[0] = new ExampleOutputPlugin();
+        outputPlugins[0] = new ExampleOutputPlugin(getContext());
         return outputPlugins;
     }
 
     @Override
     public OutputExtension[] registerOutputExtension() {
         OutputExtension[] outputExtensions = new OutputExtension[1];
-        outputExtensions[0] = new ExampleOutputExtension();
+        outputExtensions[0] = new ExampleOutputExtension(getContext());
         //outputExtensions[0].addContentDataToWishList("example");
         return outputExtensions;
     }
 
     /**
-     * use this method to register a property file (if you have one) so that Izou reloads it when you update it manually
+     * An ID must always be unique.
+     * A Class like Activator or OutputPlugin can just provide their .class.getCanonicalName()
+     * If you have to implement this interface multiple times, just concatenate unique Strings to
+     * .class.getCanonicalName()
      *
-     * @return the path to the properties file
+     * @return A String containing an ID
      */
     @Override
-    public Path registerPropertiesFile() {
-        return null;
+    public String getID() {
+        return ExampleAddOn.class.getCanonicalName();
     }
 }

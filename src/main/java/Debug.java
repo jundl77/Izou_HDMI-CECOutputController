@@ -1,5 +1,4 @@
 import intellimate.izou.addon.AddOn;
-import intellimate.izou.exampleaddon.ExampleAddOn;
 import intellimate.izou.main.Main;
 
 import java.util.LinkedList;
@@ -11,6 +10,6 @@ public class Debug {
     public static void main(String[] args) {
         LinkedList<AddOn> addOns = new LinkedList<>();
 
-        Main main = new Main(addOns);
+        Main main = new Main(addOns, true);
     }
 }

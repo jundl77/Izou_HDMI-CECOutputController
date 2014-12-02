@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId></groupId>
-    <artifactId></artifactId>
-    <packaging></packaging>
-    <version></version>
-    <name></name>
+    <groupId>test</groupId>
+    <artifactId>0.1</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+    <name>test</name>
 
     <properties>
-        <plugin.id></plugin.id>
+        <plugin.id>test</plugin.id>
         <plugin.class>path.to.the.zipfileManager</plugin.class>
-        <plugin.version></plugin.version>
-        <plugin.provider></plugin.provider>
+        <plugin.version>0.1</plugin.version>
+        <plugin.provider>test</plugin.provider>
         <plugin.dependencies />
     </properties>
 
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>intellimate.izou</groupId>
             <artifactId>Izou</artifactId>
-            <version>0.9.5-SNAPSHOT</version>
+            <version>0.9.9.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -115,12 +115,12 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <compilerArgument></compilerArgument>
                 </configuration>
             </plugin>
         </plugins>

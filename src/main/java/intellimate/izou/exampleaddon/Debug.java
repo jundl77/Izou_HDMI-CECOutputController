@@ -15,6 +15,6 @@ public class Debug {
         ExampleAddOn addOn = new ExampleAddOn();
         addOns.add(addOn);
 
-        Main main = new Main(addOns);
+        Main main = new Main(addOns, true);
     }
 }

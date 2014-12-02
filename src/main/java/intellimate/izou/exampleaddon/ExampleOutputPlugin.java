@@ -1,6 +1,7 @@
 package intellimate.izou.exampleaddon;
 
 import intellimate.izou.output.OutputPlugin;
+import intellimate.izou.system.Context;
 
 /**
  * Created by julianbrendl on 10/24/14.
@@ -11,8 +12,8 @@ public class ExampleOutputPlugin extends OutputPlugin<ExampleOutputData> {
      */
     public static final String ID = ExampleOutputExtension.class.getCanonicalName();
 
-    public ExampleOutputPlugin() {
-        super(ID);
+    public ExampleOutputPlugin(Context context) {
+        super(ID, context);
     }
 
     @Override
