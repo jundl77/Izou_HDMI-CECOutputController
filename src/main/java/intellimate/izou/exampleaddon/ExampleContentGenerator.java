@@ -42,6 +42,7 @@ public class ExampleContentGenerator extends ContentGenerator {
 
     @Override
     public List<Resource> provideResource(List<Resource> list, Optional<Event> optional) {
+        if(!list.stream().anyMatch(resource -> resource.getResourceID().equals(ResourceID))) return null;
         System.out.println("ContentGenerator generates Resource for the Event");
         Optional<Identification> identification = identificationManager.getIdentification(this);
         Resource<String> resource = new Resource<>(ResourceID);

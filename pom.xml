@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>test</groupId>
-    <artifactId>0.1</artifactId>
+    <groupId></groupId>
+    <artifactId></artifactId>
     <packaging>jar</packaging>
-    <version>0.1</version>
-    <name>test</name>
+    <version></version>
+    <name></name>
 
     <properties>
-        <plugin.id>test</plugin.id>
+        <plugin.id></plugin.id>
         <plugin.class>path.to.the.zipfileManager</plugin.class>
-        <plugin.version>0.1</plugin.version>
-        <plugin.provider>test</plugin.provider>
+        <plugin.version></plugin.version>
+        <plugin.provider></plugin.provider>
         <plugin.dependencies />
     </properties>
 
