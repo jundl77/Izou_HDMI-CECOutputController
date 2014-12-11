@@ -21,7 +21,8 @@ public class ExampleContentGenerator extends ContentGenerator {
     private static final String ID = ExampleContentGenerator.class.getCanonicalName();
     public static final String ResourceID = ExampleContentGenerator.class.getCanonicalName()+"resource";
 
-    IdentificationManager identificationManager = IdentificationManager.getInstance();
+    //TODO: use super instance variable in next version
+    private IdentificationManager identificationManager = IdentificationManager.getInstance();
 
     public ExampleContentGenerator(Context context) {
         super(ID, context);
@@ -42,7 +43,9 @@ public class ExampleContentGenerator extends ContentGenerator {
 
     @Override
     public List<Resource> provideResource(List<Resource> list, Optional<Event> optional) {
-        if(!list.stream().anyMatch(resource -> resource.getResourceID().equals(ResourceID))) return null;
+        if(!list.stream().anyMatch(resource -> resource.getResourceID().equals(ResourceID)))
+            return null;
+
         System.out.println("ContentGenerator generates Resource for the Event");
         Optional<Identification> identification = identificationManager.getIdentification(this);
         Resource<String> resource = new Resource<>(ResourceID);
