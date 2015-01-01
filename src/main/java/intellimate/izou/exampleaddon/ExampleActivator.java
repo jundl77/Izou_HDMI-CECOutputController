@@ -2,7 +2,7 @@ package intellimate.izou.exampleaddon;
 
 import intellimate.izou.activator.Activator;
 import intellimate.izou.events.Event;
-import intellimate.izou.events.LocalEventManager;
+import intellimate.izou.events.MultipleEventsException;
 import intellimate.izou.resource.Resource;
 import intellimate.izou.system.Context;
 import intellimate.izou.system.Identification;
@@ -50,6 +50,21 @@ public class ExampleActivator extends Activator {
     }
 
     public void fireEvent() {
+        try {
+
+            identificationManager.getIdentification(this)
+                    .flatMap(id -> Event.createEvent(Event.RESPONSE, id))
+                    .orElseThrow(() -> new RuntimeException("unable to create Event"))
+                    .addDescriptor(EXAMPLE_EVENT_TYPE)
+                    .tryFire(getCaller(), (event, counter) -> false);
+
+        } catch (MultipleEventsException e) {
+            context.logger.getLogger().error("Unable to fire Event", e);
+        } catch (RuntimeException e) {
+            context.logger.getLogger().error(e);
+        }
+        //imperative style
+        /*
         Optional<Identification> id = identificationManager.getIdentification(this);
         if(!id.isPresent()) return;
 
@@ -61,7 +76,7 @@ public class ExampleActivator extends Activator {
             fireEvent(event.get());
         } catch (LocalEventManager.MultipleEventsException e) {
             context.logger.getLogger().error(e);
-        }
+        }*/
     }
 
     @Override

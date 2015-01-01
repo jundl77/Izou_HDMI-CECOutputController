@@ -25,12 +25,11 @@ public class ExampleOutputExtension extends OutputExtension<ExampleOutputData> {
     @Override
     public ExampleOutputData generate(Event event) {
         System.out.println("OutputExtension generates Output Data");
-        String totalOutput = event.getListResourceContainer()
+        return event.getListResourceContainer()
                 .provideResource(ExampleContentGenerator.ResourceID)
                 .stream()
                 .map(Resource::getResource)
                 .map(object -> object instanceof String ? (String) object : "")
-                .collect(Collectors.joining());
-        return new ExampleOutputData(totalOutput);
+                .collect(Collectors.collectingAndThen(Collectors.joining(), ExampleOutputData::new));
     }
 }

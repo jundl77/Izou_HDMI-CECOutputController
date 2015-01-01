@@ -3,6 +3,8 @@ package intellimate.izou.exampleaddon;
 import intellimate.izou.output.OutputPlugin;
 import intellimate.izou.system.Context;
 
+import java.util.stream.Collectors;
+
 /**
  * Created by julianbrendl on 10/24/14.
  */
@@ -18,11 +20,9 @@ public class ExampleOutputPlugin extends OutputPlugin<ExampleOutputData> {
 
     @Override
     public void renderFinalOutput() {
-        String totalOutput = "";
-        for(ExampleOutputData outputData : this.getTDoneList()) {
-            totalOutput += outputData.getData() + ", ";
-        }
-        totalOutput = totalOutput.substring(0, totalOutput.length() - 2);
+        String totalOutput = getTDoneList().stream()
+                .map(exampleOutputData -> exampleOutputData.data)
+                .collect(Collectors.joining(", "));
         System.out.println(totalOutput);
     }
 }

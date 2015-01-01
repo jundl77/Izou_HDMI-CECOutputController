@@ -4,7 +4,6 @@ import intellimate.izou.contentgenerator.ContentGenerator;
 import intellimate.izou.events.Event;
 import intellimate.izou.resource.Resource;
 import intellimate.izou.system.Context;
-import intellimate.izou.system.Identification;
 import intellimate.izou.system.IdentificationManager;
 
 import java.util.Arrays;
@@ -26,9 +25,9 @@ public class ExampleContentGeneratorResource extends ContentGenerator{
 
     @Override
     public List<Resource> announceResources() {
-        Optional<Identification> identification = identificationManager.getIdentification(this);
         Resource<String> resource = new Resource<>(ResourceID);
-        identification.ifPresent(resource::setProvider);
+        identificationManager.getIdentification(this)
+                .ifPresent(resource::setProvider);
         return Arrays.asList(resource);
     }
 
@@ -39,12 +38,12 @@ public class ExampleContentGeneratorResource extends ContentGenerator{
 
     @Override
     public List<Resource> provideResource(List<Resource> list, Optional<Event> optional) {
-        if(!list.stream().anyMatch(resource -> resource.getResourceID().equals(ResourceID))) return null;
+        //normally you would have to check which resource to generate, but we only provide more than 1
         System.out.println("ContentGenerator generates Resource for the Request");
-        Optional<Identification> identification = identificationManager.getIdentification(this);
-        Resource<String> resource = new Resource<>(ResourceID);
-        identification.ifPresent(resource::setProvider);
-        resource.setResource("Awesome Resource!");
-        return Arrays.asList(resource);
+        return identificationManager.getIdentification(this)
+                .map(id -> new Resource<String>(ResourceID, id))
+                .orElse(new Resource<String>(ResourceID))
+                .setResource("Awesome Resource!")
+                .map(Arrays::asList);
     }
 }

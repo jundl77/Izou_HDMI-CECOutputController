@@ -4,7 +4,6 @@ import intellimate.izou.contentgenerator.ContentGenerator;
 import intellimate.izou.events.Event;
 import intellimate.izou.resource.Resource;
 import intellimate.izou.system.Context;
-import intellimate.izou.system.Identification;
 import intellimate.izou.system.IdentificationManager;
 
 import java.util.Arrays;
@@ -30,9 +29,9 @@ public class ExampleContentGenerator extends ContentGenerator {
 
     @Override
     public List<Resource> announceResources() {
-        Optional<Identification> identification = identificationManager.getIdentification(this);
         Resource<String> resource = new Resource<>(ResourceID);
-        identification.ifPresent(resource::setProvider);
+        identificationManager.getIdentification(this)
+                .ifPresent(resource::setProvider);
         return Arrays.asList(resource);
     }
 
@@ -47,10 +46,10 @@ public class ExampleContentGenerator extends ContentGenerator {
             return null;
 
         System.out.println("ContentGenerator generates Resource for the Event");
-        Optional<Identification> identification = identificationManager.getIdentification(this);
-        Resource<String> resource = new Resource<>(ResourceID);
-        identification.ifPresent(resource::setProvider);
-        resource.setResource("Hello World!");
-        return Arrays.asList(resource);
+        return identificationManager.getIdentification(this)
+                .map(id -> new Resource<String>(ResourceID, id))
+                .orElse(new Resource<String>(ResourceID))
+                .setResource("Hello World!")
+                .map(Arrays::asList);
     }
 }
