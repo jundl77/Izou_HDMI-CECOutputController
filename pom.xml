@@ -12,7 +12,7 @@
 
     <properties>
         <plugin.id></plugin.id>
-        <plugin.class>path.to.the.zipfileManager</plugin.class>
+        <plugin.class>path.to.the.ZipFileManager</plugin.class>
         <plugin.version></plugin.version>
         <plugin.provider></plugin.provider>
         <plugin.dependencies />
