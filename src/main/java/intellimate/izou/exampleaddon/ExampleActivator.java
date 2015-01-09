@@ -71,9 +71,8 @@ public class ExampleActivator extends Activator {
         Optional<Event> event = Event.createEvent(Event.RESPONSE, id.get());
         if(!event.isPresent()) return;
 
-        event.get().addDescriptor(EXAMPLE_EVENT_TYPE);
         try {
-            fireEvent(event.get());
+            fireEvent(event.get().addDescriptor(EXAMPLE_EVENT_TYPE));
         } catch (LocalEventManager.MultipleEventsException e) {
             context.logger.getLogger().error(e);
         }*/
