@@ -54,13 +54,13 @@ public class ExampleActivator extends Activator {
 
             identificationManager.getIdentification(this)
                     .flatMap(id -> Event.createEvent(Event.RESPONSE, id))
-                    .orElseThrow(() -> new RuntimeException("unable to create Event"))
+                    .orElseThrow(() -> new IllegalStateException("unable to create Event"))
                     .addDescriptor(EXAMPLE_EVENT_TYPE)
                     .tryFire(getCaller(), (event, counter) -> false);
 
         } catch (MultipleEventsException e) {
             context.logger.getLogger().error("Unable to fire Event", e);
-        } catch (RuntimeException e) {
+        } catch (IllegalStateException e) {
             context.logger.getLogger().error(e);
         }
         //imperative style
