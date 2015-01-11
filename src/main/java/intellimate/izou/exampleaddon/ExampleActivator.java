@@ -2,15 +2,9 @@ package intellimate.izou.exampleaddon;
 
 import intellimate.izou.activator.Activator;
 import intellimate.izou.events.Event;
-import intellimate.izou.events.MultipleEventsException;
 import intellimate.izou.resource.Resource;
 import intellimate.izou.system.Context;
-import intellimate.izou.system.Identification;
 import intellimate.izou.system.IdentificationManager;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * Created by julianbrendl on 10/24/14.
@@ -18,12 +12,10 @@ import java.util.function.Consumer;
 public class ExampleActivator extends Activator {
 
     public final static String EXAMPLE_EVENT_TYPE = ExampleActivator.class.getCanonicalName()+".exampleEvent";
-    private Context context;
     private IdentificationManager identificationManager = IdentificationManager.getInstance();
 
     public ExampleActivator(Context context) {
         super(context);
-        this.context = context;
     }
 
     @Override
@@ -34,34 +26,29 @@ public class ExampleActivator extends Activator {
     }
 
     public void retrieveResource() {
-        Resource resourceRequest = new Resource(ExampleContentGeneratorResource.ResourceID);
-
-        //optional, if you want to specify which provider should generate the resource
-        Optional<Identification> providerID = identificationManager.getIdentification(ExampleContentGeneratorResource.ID);
-        providerID.ifPresent(resourceRequest::setProvider);
-
-        Consumer<List<Resource>> consumer = resourceResultList -> resourceResultList.stream()
-                .map(Resource::getResource)
-                .filter(object -> object instanceof String)
-                .map(object -> (String) object)
-                .forEach(System.out::println);
-
-        context.resources.generateResource(resourceRequest, consumer);
+        identificationManager.getIdentification(ExampleContentGeneratorResource.ID)
+                .map(id -> new Resource(ExampleContentGeneratorResource.ResourceID, id))
+                .flatMap(getContext().resources::generateResource)
+                .ifPresent(future ->
+                    future.thenAccept(list -> list.stream()
+                            .map(Resource::getResource)
+                            .filter(object -> object instanceof String)
+                            .map(object -> (String) object)
+                            .forEach(System.out::println)
+                    )
+                );
     }
 
     public void fireEvent() {
         try {
-
             identificationManager.getIdentification(this)
                     .flatMap(id -> Event.createEvent(Event.RESPONSE, id))
                     .orElseThrow(() -> new IllegalStateException("unable to create Event"))
                     .addDescriptor(EXAMPLE_EVENT_TYPE)
-                    .tryFire(getCaller(), (event, counter) -> false);
+                    .fire(getCaller(), event -> getContext().logger.getLogger().error("unable to fire"));
 
-        } catch (MultipleEventsException e) {
-            context.logger.getLogger().error("Unable to fire Event", e);
         } catch (IllegalStateException e) {
-            context.logger.getLogger().error(e);
+            getContext().logger.getLogger().error(e);
         }
         //imperative style
         /*
@@ -70,9 +57,10 @@ public class ExampleActivator extends Activator {
 
         Optional<Event> event = Event.createEvent(Event.RESPONSE, id.get());
         if(!event.isPresent()) return;
+        event.of(event.addDescriptor(EXAMPLE_EVENT_TYPE));
 
         try {
-            fireEvent(event.get().addDescriptor(EXAMPLE_EVENT_TYPE));
+            fireEvent(event.get());
         } catch (LocalEventManager.MultipleEventsException e) {
             context.logger.getLogger().error(e);
         }*/
@@ -80,7 +68,7 @@ public class ExampleActivator extends Activator {
 
     @Override
     public boolean terminated(Exception e) {
-        context.logger.getLogger().fatal(e);
+        getContext().logger.getLogger().fatal(e);
         return false;
     }
 

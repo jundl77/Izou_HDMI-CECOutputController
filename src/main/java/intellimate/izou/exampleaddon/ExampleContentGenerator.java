@@ -29,10 +29,10 @@ public class ExampleContentGenerator extends ContentGenerator {
 
     @Override
     public List<Resource> announceResources() {
-        Resource<String> resource = new Resource<>(ResourceID);
-        identificationManager.getIdentification(this)
-                .ifPresent(resource::setProvider);
-        return Arrays.asList(resource);
+        return identificationManager.getIdentification(this)
+                .map(id -> new Resource<String>(ResourceID, id))
+                .orElse(new Resource<String>(ResourceID))
+                .map(resource -> Arrays.asList((Resource) resource));
     }
 
     @Override
