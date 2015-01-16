@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * Created by LeanderK on 02/12/14.
  */
-public class ExampleContentGeneratorResource extends ContentGenerator{
+public class ExampleContentGeneratorResource extends ContentGenerator {
     public static String ID = ExampleContentGeneratorResource.class.getCanonicalName();
     public static String ResourceID = ExampleContentGenerator.class.getCanonicalName() +".Resource1";
 
