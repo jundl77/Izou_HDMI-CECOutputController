@@ -1,4 +1,4 @@
-package intellimate.izou.exampleaddon;
+package org.intellimate.izou.exampleaddon;
 
 /**
  * Created by julianbrendl on 10/24/14.

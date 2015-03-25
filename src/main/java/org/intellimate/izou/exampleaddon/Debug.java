@@ -1,7 +1,7 @@
-package intellimate.izou.exampleaddon;
+package org.intellimate.izou.exampleaddon;
 
-import intellimate.izou.addon.AddOn;
-import intellimate.izou.main.Main;
+import org.intellimate.izou.addon.AddOnModel;
+import org.intellimate.izou.main.Main;
 
 import java.util.LinkedList;
 
@@ -10,7 +10,7 @@ import java.util.LinkedList;
  */
 public class Debug {
     public static void main(String[] args) {
-        LinkedList<AddOn> addOns = new LinkedList<>();
+        LinkedList<AddOnModel> addOns = new LinkedList<>();
 
         ExampleAddOn addOn = new ExampleAddOn();
         addOns.add(addOn);

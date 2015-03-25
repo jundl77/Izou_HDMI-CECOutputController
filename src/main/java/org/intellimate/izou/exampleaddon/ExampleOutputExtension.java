@@ -1,9 +1,9 @@
-package intellimate.izou.exampleaddon;
+package org.intellimate.izou.exampleaddon;
 
-import intellimate.izou.events.Event;
-import intellimate.izou.output.OutputExtension;
-import intellimate.izou.resource.Resource;
-import intellimate.izou.system.Context;
+import org.intellimate.izou.events.EventModel;
+import org.intellimate.izou.resource.ResourceModel;
+import org.intellimate.izou.sdk.Context;
+import org.intellimate.izou.sdk.output.OutputExtension;
 
 import java.util.stream.Collectors;
 
@@ -22,13 +22,18 @@ public class ExampleOutputExtension extends OutputExtension<ExampleOutputData> {
         setPluginId(ExampleOutputPlugin.ID);
     }
 
+    /**
+     * generates the data for the given Event
+     *
+     * @param event the event to generate for
+     * @return the result
+     */
     @Override
-    public ExampleOutputData generate(Event event) {
+    public ExampleOutputData generate(EventModel event) {
         System.out.println("OutputExtension generates Output Data");
         return event.getListResourceContainer()
-                .provideResource(ExampleContentGenerator.ResourceID)
-                .stream()
-                .map(Resource::getResource)
+                .provideResource(ExampleContentGenerator.ResourceID).stream()
+                .map(ResourceModel::getResource)
                 .map(object -> object instanceof String ? (String) object : "")
                 .collect(Collectors.collectingAndThen(Collectors.joining(), ExampleOutputData::new));
     }
