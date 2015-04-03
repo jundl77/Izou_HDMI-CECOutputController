@@ -26,20 +26,9 @@
         <dependency>
             <groupId>org.intellimate.izou</groupId>
             <artifactId>sdk</artifactId>
-            <version>[0.5,0.6)</version>
+            <version>[0.5,1.0)</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>sdk</id>
-            <url>https://raw.github.com/intellimate/IzouSDK/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <distributionManagement>
         <repository>
