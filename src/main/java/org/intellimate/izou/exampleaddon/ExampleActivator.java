@@ -3,6 +3,7 @@ package org.intellimate.izou.exampleaddon;
 import org.intellimate.izou.resource.ResourceModel;
 import org.intellimate.izou.sdk.Context;
 import org.intellimate.izou.sdk.activator.Activator;
+import org.intellimate.izou.sdk.events.CommonEvents;
 import org.intellimate.izou.sdk.events.Event;
 import org.intellimate.izou.sdk.util.ResourceUser;
 
@@ -44,7 +45,7 @@ public class ExampleActivator extends Activator implements ResourceUser {
      * fires the event
      */
     private void fireEvent() {
-        boolean fire = fire(Event.RESPONSE, Arrays.asList(ExampleContentGenerator.EXAMPLE_EVENT_TYPE));
-        if (!fire) error("unable to fire event: " + Event.RESPONSE + ", " + ExampleContentGenerator.EXAMPLE_EVENT_TYPE);
+        boolean fire = fire(CommonEvents.Type.RESPONSE_TYPE, Arrays.asList(ExampleContentGenerator.EXAMPLE_EVENT_TYPE));
+        if (!fire) error("unable to fire event: " + CommonEvents.Type.RESPONSE_TYPE + ", " + ExampleContentGenerator.EXAMPLE_EVENT_TYPE);
     }
 }
