@@ -1,5 +1,6 @@
 package org.intellimate.izou.exampleaddon;
 
+import org.intellimate.izou.events.EventModel;
 import org.intellimate.izou.sdk.Context;
 import org.intellimate.izou.sdk.output.OutputPlugin;
 
@@ -25,7 +26,7 @@ public class ExampleOutputPlugin extends OutputPlugin<ExampleOutputData> {
      * @param data the data generated
      */
     @Override
-    public void renderFinalOutput(List<ExampleOutputData> data) {
+    public void renderFinalOutput(List<ExampleOutputData> data, EventModel eventModel) {
         String totalOutput = data.stream()
                 .map(exampleOutputData -> exampleOutputData.data)
                 .collect(Collectors.joining(", "));
