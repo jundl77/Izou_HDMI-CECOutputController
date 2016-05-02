@@ -173,6 +173,7 @@
                             <Plugin-Dependencies>${plugin.dependencies}</Plugin-Dependencies>
                             <Server-ID>${server.id}</Server-ID>
                             <SDK-Version>{$sdk.version}</SDK-Version>
+                            <Artifact-ID>{$artifactId}</Artifact-ID>
                         </manifestEntries>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
