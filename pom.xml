@@ -17,6 +17,8 @@
         <plugin.dependencies />
         <repo.name></repo.name>
         <repo.owner></repo.owner>
+        <server.id></server.id>
+        <sdk.version></sdk.version>
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
     </properties>
@@ -169,6 +171,8 @@
                             <Plugin-Version>${project.version}</Plugin-Version>
                             <Plugin-Provider>${plugin.provider}</Plugin-Provider>
                             <Plugin-Dependencies>${plugin.dependencies}</Plugin-Dependencies>
+                            <Server-ID>${server.id}</Server-ID>
+                            <SDK-Version>{$sdk.version}</SDK-Version>
                         </manifestEntries>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
