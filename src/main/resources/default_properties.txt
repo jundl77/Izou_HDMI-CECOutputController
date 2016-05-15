@@ -1,0 +1,6 @@
+# HDMI-CEC Commands, check http://www.cec-o-matic.com/ for more info
+
+ON = on 0
+OFF = standby 0
+
+RPI_SOURCE = as

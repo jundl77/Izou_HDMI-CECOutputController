@@ -1,4 +1,4 @@
-package org.intellimate.izou.exampleaddon;
+package jundl77.izou.addon.izoucecoutputcontroller;
 
 import ro.fortsoft.pf4j.PluginWrapper;
 
